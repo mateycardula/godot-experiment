@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://6eoqja4linm8"]
+
+[ext_resource type="Script" path="res://event_controller.gd" id="1_ldpq8"]
+
+[node name="Timer" type="Timer"]
+wait_time = 5.0
+autostart = true
+script = ExtResource("1_ldpq8")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

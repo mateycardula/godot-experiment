@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://3bqrt3kx78mo"]
+
+[ext_resource type="Script" path="res://scripts/zombie.gd" id="1_a8uqf"]
+[ext_resource type="Resource" uid="uid://bsia3pn6vxe6y" path="res://scripts/ZombieData/zombie_normal.tres" id="2_fgpee"]
+[ext_resource type="SpriteFrames" uid="uid://bndla6wjox0vo" path="res://assets/Animations/zombie-backup.tres" id="3_rsc7d"]
+[ext_resource type="PackedScene" uid="uid://cl4ouwf6vg1h1" path="res://scenes/health_controller.tscn" id="15_o6t67"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sd04k"]
+
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("health_controller")]
+position = Vector2(0, 6)
+collision_mask = 0
+script = ExtResource("1_a8uqf")
+zombie_data = ExtResource("2_fgpee")
+health_controller = NodePath("HealthController")
+
+[node name="AmimationsNode" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_rsc7d")
+animation = &"zombie2"
+speed_scale = 1.2
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4.435, 18.02)
+shape = SubResource("RectangleShape2D_sd04k")
+
+[node name="HealthController" parent="." instance=ExtResource("15_o6t67")]
+position = Vector2(9, -212)

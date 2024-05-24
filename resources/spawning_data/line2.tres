@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SpawningData" load_steps=2 format=3 uid="uid://b4yl4jv1ra7dd"]
+
+[ext_resource type="Script" path="res://resources/spawning_data/spawning_data.gd" id="1_e1mvh"]
+
+[resource]
+script = ExtResource("1_e1mvh")
+init_y = 300
+scale_ratio = 0.7
+z_index = 2

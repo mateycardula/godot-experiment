@@ -1,0 +1,92 @@
+[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://bndla6wjox0vo"]
+
+[ext_resource type="Texture2D" uid="uid://bxwwk3kms4yyq" path="res://assets/Zombie1/animation/Walk1.png" id="1_8na0c"]
+[ext_resource type="Texture2D" uid="uid://oci375re8nro" path="res://assets/Zombie1/animation/Walk2.png" id="2_sufns"]
+[ext_resource type="Texture2D" uid="uid://ciy7i7oijy1hb" path="res://assets/Zombie1/animation/Walk3.png" id="3_q8mir"]
+[ext_resource type="Texture2D" uid="uid://qwjppmepjs31" path="res://assets/Zombie1/animation/Walk4.png" id="4_asoo6"]
+[ext_resource type="Texture2D" uid="uid://b5faqqps6cxmh" path="res://assets/Zombie1/animation/Walk5.png" id="5_htd23"]
+[ext_resource type="Texture2D" uid="uid://cascxgla4slhi" path="res://assets/Zombie1/animation/Walk6.png" id="6_qy6l2"]
+[ext_resource type="Texture2D" uid="uid://bxf6ba6cmggom" path="res://assets/Zombie2/animation/Walk1.png" id="7_1sfie"]
+[ext_resource type="Texture2D" uid="uid://c5tbvtr1e8gei" path="res://assets/Zombie2/animation/Walk2.png" id="8_uab44"]
+[ext_resource type="Texture2D" uid="uid://bencinloy3p70" path="res://assets/Zombie2/animation/Walk3.png" id="9_s5vfu"]
+[ext_resource type="Texture2D" uid="uid://bbtsjmfa7yax5" path="res://assets/Zombie2/animation/Walk4.png" id="10_2whnu"]
+[ext_resource type="Texture2D" uid="uid://fx4akldmj1yo" path="res://assets/Zombie2/animation/Walk5.png" id="11_nhm8r"]
+[ext_resource type="Texture2D" uid="uid://blwqy6r5nviib" path="res://assets/Zombie2/animation/Walk6.png" id="12_3vw3m"]
+[ext_resource type="Texture2D" uid="uid://p124hyfxwalh" path="res://assets/Zombie3/animation/Walk1.png" id="13_4qool"]
+[ext_resource type="Texture2D" uid="uid://by80gy8ri3eqt" path="res://assets/Zombie3/animation/Walk2.png" id="14_ymce0"]
+[ext_resource type="Texture2D" uid="uid://bjuejm4cunept" path="res://assets/Zombie3/animation/Walk3.png" id="15_l0cko"]
+[ext_resource type="Texture2D" uid="uid://dwt6b7usi2363" path="res://assets/Zombie3/animation/Walk4.png" id="16_ag5h3"]
+[ext_resource type="Texture2D" uid="uid://dg53oeejxxk4t" path="res://assets/Zombie3/animation/Walk5.png" id="17_iyfht"]
+[ext_resource type="Texture2D" uid="uid://2bstq6sm1ty7" path="res://assets/Zombie3/animation/Walk6.png" id="18_pmetg"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8na0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_sufns")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q8mir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_asoo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_htd23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qy6l2")
+}],
+"loop": true,
+"name": &"zombie1",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_1sfie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uab44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_s5vfu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2whnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_nhm8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3vw3m")
+}],
+"loop": true,
+"name": &"zombie2",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_4qool")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ymce0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_l0cko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_ag5h3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_iyfht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_pmetg")
+}],
+"loop": true,
+"name": &"zombie3",
+"speed": 7.0
+}]

@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://cl4ouwf6vg1h1"]
+
+[ext_resource type="Script" path="res://scripts/HealthController.gd" id="1_wucly"]
+
+[sub_resource type="Gradient" id="Gradient_dd1b7"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.543933, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ll610"]
+gradient = SubResource("Gradient_dd1b7")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_t1uaf"]
+colors = PackedColorArray(6.97896e-07, 0.470318, 0.215379, 1, 0.383575, 0.789708, 0.384252, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sl7ex"]
+gradient = SubResource("Gradient_t1uaf")
+fill_to = Vector2(1, 0.264957)
+
+[node name="HealthController" type="Node2D" node_paths=PackedStringArray("health_bar_ui")]
+script = ExtResource("1_wucly")
+health_bar_ui = NodePath("TextureProgressBar")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -132.0
+offset_top = -16.0
+offset_right = -68.0
+offset_bottom = 48.0
+scale = Vector2(4.12, 0.467077)
+pivot_offset = Vector2(-0.082428, -1.2682)
+texture_under = SubResource("GradientTexture2D_ll610")
+texture_progress = SubResource("GradientTexture2D_sl7ex")

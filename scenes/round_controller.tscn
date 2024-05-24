@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://chc6jxdr7hie2"]
+
+[ext_resource type="Script" path="res://scripts/round_controller.gd" id="1_8xwuy"]
+
+[node name="RoundController" type="Node"]
+script = ExtResource("1_8xwuy")

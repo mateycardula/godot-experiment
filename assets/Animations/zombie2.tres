@@ -1,0 +1,63 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://b7s0pqshbvir"]
+
+[ext_resource type="Texture2D" uid="uid://bxwwk3kms4yyq" path="res://assets/Zombie1/animation/Walk1.png" id="1_hubew"]
+[ext_resource type="Texture2D" uid="uid://oci375re8nro" path="res://assets/Zombie1/animation/Walk2.png" id="2_8mbr8"]
+[ext_resource type="Texture2D" uid="uid://ciy7i7oijy1hb" path="res://assets/Zombie1/animation/Walk3.png" id="3_xf5s0"]
+[ext_resource type="Texture2D" uid="uid://qwjppmepjs31" path="res://assets/Zombie1/animation/Walk4.png" id="4_dt4ex"]
+[ext_resource type="Texture2D" uid="uid://b5faqqps6cxmh" path="res://assets/Zombie1/animation/Walk5.png" id="5_x6kwn"]
+[ext_resource type="Texture2D" uid="uid://cascxgla4slhi" path="res://assets/Zombie1/animation/Walk6.png" id="6_fb6jy"]
+[ext_resource type="Texture2D" uid="uid://bxf6ba6cmggom" path="res://assets/Zombie2/animation/Walk1.png" id="7_sryo0"]
+[ext_resource type="Texture2D" uid="uid://c5tbvtr1e8gei" path="res://assets/Zombie2/animation/Walk2.png" id="8_53ejh"]
+[ext_resource type="Texture2D" uid="uid://bencinloy3p70" path="res://assets/Zombie2/animation/Walk3.png" id="9_t50o3"]
+[ext_resource type="Texture2D" uid="uid://bbtsjmfa7yax5" path="res://assets/Zombie2/animation/Walk4.png" id="10_li5jk"]
+[ext_resource type="Texture2D" uid="uid://fx4akldmj1yo" path="res://assets/Zombie2/animation/Walk5.png" id="11_6ly3i"]
+[ext_resource type="Texture2D" uid="uid://blwqy6r5nviib" path="res://assets/Zombie2/animation/Walk6.png" id="12_151cl"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hubew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8mbr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xf5s0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_dt4ex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_x6kwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fb6jy")
+}],
+"loop": true,
+"name": &"zombie1",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_sryo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_53ejh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t50o3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_li5jk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6ly3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_151cl")
+}],
+"loop": true,
+"name": &"zombie2",
+"speed": 7.0
+}]

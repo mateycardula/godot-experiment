@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ZombieData" load_steps=3 format=3 uid="uid://bsia3pn6vxe6y"]
+
+[ext_resource type="SpriteFrames" uid="uid://br1ghol6pe6f2" path="res://assets/Animations/zombie1.tres" id="1_d0h8a"]
+[ext_resource type="Script" path="res://scripts/ZombieData/zombie_resources.gd" id="1_wjo08"]
+
+[resource]
+script = ExtResource("1_wjo08")
+health = 100.0
+speed = 70
+size = 0.5
+z_offset = -1
+animation = ExtResource("1_d0h8a")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwf70u8nih40"]
+
+[ext_resource type="PackedScene" uid="uid://cp87vu6wrt3nh" path="res://scenes/zombie_spawner.tscn" id="1_8vyds"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_ytuu0"]
+[ext_resource type="PackedScene" uid="uid://6eoqja4linm8" path="res://scenes/timer.tscn" id="2_q28kv"]
+[ext_resource type="PackedScene" uid="uid://chc6jxdr7hie2" path="res://scenes/round_controller.tscn" id="4_kfx8u"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_ytuu0")
+
+[node name="ZombieSpawner" parent="." instance=ExtResource("1_8vyds")]
+position = Vector2(1047, 618)
+
+[node name="Timer" parent="." instance=ExtResource("2_q28kv")]
+
+[node name="RoundController" parent="." instance=ExtResource("4_kfx8u")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
