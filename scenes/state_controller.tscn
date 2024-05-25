@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctl6be17cykey"]
+
+[ext_resource type="Script" path="res://scripts/state_controller.gd" id="1_khytb"]
+
+[sub_resource type="MeshTexture" id="MeshTexture_tgrmj"]
+
+[node name="StateController" type="Node2D"]
+script = ExtResource("1_khytb")
+
+[node name="PAUSE" type="Button" parent="."]
+offset_left = 278.0
+offset_top = 519.0
+offset_right = 468.0
+offset_bottom = 571.0
+text = "PAUSE"
+icon = SubResource("MeshTexture_tgrmj")
+
+[node name="RESUME" type="Button" parent="."]
+offset_left = 723.0
+offset_top = 526.0
+offset_right = 913.0
+offset_bottom = 578.0
+text = "RESUME"
+icon = SubResource("MeshTexture_tgrmj")
+
+[connection signal="pressed" from="PAUSE" to="." method="_on_pause_pressed"]
+[connection signal="pressed" from="RESUME" to="." method="_on_resume_pressed"]

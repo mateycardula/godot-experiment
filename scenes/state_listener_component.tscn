@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsksdr1ac7n1y"]
+
+[ext_resource type="Script" path="res://scripts/state_component.gd" id="1_3xlj5"]
+
+[node name="StateListenerComponent" type="Node"]
+script = ExtResource("1_3xlj5")

@@ -13,7 +13,6 @@ var round_controller
 signal test_signal
 
 func _ready(): 
-	spawned_zombies = 0
 	round_controller = get_node("../RoundController")	
 	round_controller.next_round.connect(new_round_setup)
 	
@@ -29,18 +28,27 @@ func _on_timer_timeout():
 	pass # Replace with function body.
 
 func spawn_zombie(): 
-	
-	var spawn_line = spawning_lines[randi_range(0, spawning_lines.size() - 1)]
 	var new_zombie = zombie_scene.instantiate()
-	new_zombie.zombie_data = zombie_data[randi_range(0, differing_zombies)]
-	new_zombie.translate(Vector2(0, -spawn_line.init_y))
-	new_zombie.z_index = spawn_line.z_index
-	new_zombie.scale *= spawn_line.scale_ratio
+	set_zombie_data(new_zombie)
+	connect_zombie_signals(new_zombie)
 	add_child(new_zombie)
+	new_zombie.add_to_group("Zombies")
 	spawned_zombies+=1
 
 func new_round_setup(round_number, zombies_number):
 	differing_zombies = clamp(round_number-1, 0, zombie_data.size() - 1)
 	max_zombies = zombies_number
+	spawned_zombies = 0
 	print("ROUND NUMBER: ", round_number)
 		
+func connect_zombie_signals(zombie):
+	zombie.zombie_died.connect(round_controller.zombie_killed)
+	
+	
+func set_zombie_data(zombie):
+	var spawn_line = spawning_lines[randi_range(0, spawning_lines.size() - 1)]
+	zombie.zombie_data = zombie_data[randi_range(0, differing_zombies)]
+	zombie.translate(Vector2(0, -spawn_line.init_y))
+	zombie.z_index = spawn_line.z_index
+	zombie.scale *= spawn_line.scale_ratio
+	

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 var zombie_spawner
 # Called when the node enters the scene tree for the first time.

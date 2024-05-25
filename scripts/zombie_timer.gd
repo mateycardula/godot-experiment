@@ -13,5 +13,5 @@ func _process(delta):
 
 
 func _on_timeout():
-	wait_time = randf_range(2.0, 5.0)
+	wait_time = randf_range(1.0, 2.0)
 	pass # Replace with function body.

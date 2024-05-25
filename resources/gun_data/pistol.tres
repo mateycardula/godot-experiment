@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GunData" load_steps=3 format=3 uid="uid://uonwna2fcyex"]
+
+[ext_resource type="SpriteFrames" uid="uid://dixcp5lqoo4ig" path="res://assets/Guns/Pistol/Animations/pistol.tres" id="1_5p4gq"]
+[ext_resource type="Script" path="res://resources/gun_data/gun_resource.gd" id="1_a7bfq"]
+
+[resource]
+script = ExtResource("1_a7bfq")
+damage = 50
+cosecutive_shots = 1
+animation = ExtResource("1_5p4gq")

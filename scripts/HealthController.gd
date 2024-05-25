@@ -22,5 +22,11 @@ func initialize_health(_health : int):
 	health_bar_ui.value = health
 	pass
 	
-
+func damage(_damage: int):
+	health -= _damage
+	health_bar_ui.value = health
+	if(health<=0): 
+		die()
 	
+func die():
+	parent.die()

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c84ljpgu2koy6"]
+
+[ext_resource type="Script" path="res://scripts/Guns/Gun.gd" id="1_oaxc6"]
+[ext_resource type="Resource" uid="uid://uonwna2fcyex" path="res://resources/gun_data/pistol.tres" id="2_bvjjx"]
+
+[node name="Gun" type="Node2D" node_paths=PackedStringArray("animation_controller")]
+scale = Vector2(2, 2)
+script = ExtResource("1_oaxc6")
+gun_data = ExtResource("2_bvjjx")
+animation_controller = NodePath("AnimatedSprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+animation = &""
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

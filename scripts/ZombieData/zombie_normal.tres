@@ -8,5 +8,5 @@ script = ExtResource("1_wjo08")
 health = 100.0
 speed = 70
 size = 0.5
-z_offset = -1
+z_offset = -2
 animation = ExtResource("1_d0h8a")
