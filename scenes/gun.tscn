@@ -1,18 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://c84ljpgu2koy6"]
+[gd_scene load_steps=4 format=3 uid="uid://c84ljpgu2koy6"]
 
 [ext_resource type="Script" path="res://scripts/Guns/Gun.gd" id="1_oaxc6"]
 [ext_resource type="Resource" uid="uid://uonwna2fcyex" path="res://resources/gun_data/pistol.tres" id="2_bvjjx"]
+[ext_resource type="Texture2D" uid="uid://d376qhvyluvot" path="res://assets/Guns/Crosshairs/Crosshair Solid (19).png" id="3_t0eyw"]
 
-[node name="Gun" type="Node2D" node_paths=PackedStringArray("animation_controller")]
+[node name="Gun" type="Node2D" node_paths=PackedStringArray("animation_controller", "crosshair")]
 scale = Vector2(2, 2)
 script = ExtResource("1_oaxc6")
 gun_data = ExtResource("2_bvjjx")
 animation_controller = NodePath("AnimatedSprite2D")
+crosshair = NodePath("Crosshair")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 animation = &""
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="Crosshair" type="Sprite2D" parent="."]
+modulate = Color(0.858567, 0.274124, 0.465547, 1)
+top_level = true
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_t0eyw")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

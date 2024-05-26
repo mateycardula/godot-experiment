@@ -2,6 +2,8 @@ class_name Gun extends Node2D
 
 @export var gun_data : GunData
 @export var animation_controller : AnimatedSprite2D
+@export var crosshair : Sprite2D
+
 var min
 var nearest
 var check
@@ -20,8 +22,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	get_closest_enemy()
-	
+	nearest = get_closest_enemy()
+	if (nearest != null):
+		crosshair.visible = true
+		crosshair.z_index = nearest.z_index+1
+		crosshair.position = nearest.global_position
+	else:
+		crosshair.visible = false
+		
 func sort_closest(a, b):
 	return a.position < b.position
 
@@ -35,7 +43,6 @@ func get_closest_enemy():
 	
 	for enemy in enemies:
 		if enemy.is_alive:
-			enemy.modulate = Color.BROWN
 			return enemy
 	
 

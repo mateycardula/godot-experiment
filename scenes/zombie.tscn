@@ -1,21 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://3bqrt3kx78mo"]
+[gd_scene load_steps=9 format=3 uid="uid://3bqrt3kx78mo"]
 
 [ext_resource type="Script" path="res://scripts/zombie.gd" id="1_a8uqf"]
 [ext_resource type="Resource" uid="uid://bsia3pn6vxe6y" path="res://scripts/ZombieData/zombie_normal.tres" id="2_fgpee"]
 [ext_resource type="SpriteFrames" uid="uid://bndla6wjox0vo" path="res://assets/Animations/zombie-backup.tres" id="3_rsc7d"]
 [ext_resource type="Script" path="res://scripts/state_component.gd" id="5_d4ssp"]
 [ext_resource type="Script" path="res://scripts/zombie_signal_publisher.gd" id="6_rlaet"]
+[ext_resource type="PackedScene" uid="uid://bqqrdwp3on6k" path="res://scenes/time_control.tscn" id="7_iq8em"]
 [ext_resource type="PackedScene" uid="uid://cl4ouwf6vg1h1" path="res://scenes/health_controller.tscn" id="15_o6t67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sd04k"]
 
-[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("health_controller", "zombie_signal_publisher")]
+[node name="Zombie" type="CharacterBody2D" node_paths=PackedStringArray("health_controller", "publish_signal", "time_control")]
 position = Vector2(0, 6)
 collision_mask = 0
 script = ExtResource("1_a8uqf")
 zombie_data = ExtResource("2_fgpee")
 health_controller = NodePath("HealthController")
-zombie_signal_publisher = NodePath("ZombieSignalPublisher")
+publish_signal = NodePath("ZombieSignalPublisher")
+time_control = NodePath("TimeControl")
 
 [node name="AmimationsNode" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_rsc7d")
@@ -35,3 +37,5 @@ script = ExtResource("5_d4ssp")
 
 [node name="ZombieSignalPublisher" type="Node" parent="."]
 script = ExtResource("6_rlaet")
+
+[node name="TimeControl" parent="." instance=ExtResource("7_iq8em")]

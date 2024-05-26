@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmneire7g6t3h"]
-
-[ext_resource type="Script" path="res://scripts/ui_signal_listener.gd" id="1_k2hbc"]
-
-[node name="UiSignalListener" type="Node"]
-script = ExtResource("1_k2hbc")

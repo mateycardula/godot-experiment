@@ -1,5 +1,8 @@
 class_name SignalMiddleware extends Node
 
+@onready var all_signals : SignalDataHolder = find_signal_controller(self, "SignalDataHolder") 
+@onready var parent = get_parent() 
+
 func find_signal_controller(node, controller_name):
 	var parent = node.get_parent()
 	while(parent.get_parent() != null):

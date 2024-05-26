@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5q4kpb52dtkf"]
-
-[ext_resource type="Script" path="res://scripts/ui_signal_publisher.gd" id="1_1g5y8"]
-
-[node name="UiSignalPublisher" type="Node"]
-script = ExtResource("1_1g5y8")

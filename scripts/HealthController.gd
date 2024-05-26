@@ -14,8 +14,6 @@ func _ready():
 func _process(delta):
 	pass
 	
-
-
 func initialize_health(_health : int):
 	health = _health
 	health_bar_ui.max_value = health

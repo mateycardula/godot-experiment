@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://eei4ugnj34g1"]
+
+[ext_resource type="Script" path="res://scenes/signals/listeners/derived_listeners/total_zombies_killed_listener/total_zombies_killed_listener.gd" id="1_qwo6d"]
+
+[node name="TotalZombiesKilledListener" type="Node"]
+script = ExtResource("1_qwo6d")

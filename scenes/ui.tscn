@@ -1,7 +1,33 @@
-[gd_scene load_steps=3 format=3 uid="uid://b14evwsxlwdwq"]
+[gd_scene load_steps=9 format=3 uid="uid://b14evwsxlwdwq"]
 
 [ext_resource type="Script" path="res://scripts/total_zombies_killed_label.gd" id="1_rsf3b"]
-[ext_resource type="Script" path="res://events/ui_change/total_zombies_killed_listener.gd" id="3_5mr6v"]
+[ext_resource type="Script" path="res://scenes/signals/listeners/derived_listeners/total_zombies_killed_listener/total_zombies_killed_listener.gd" id="2_wts2l"]
+[ext_resource type="Script" path="res://scripts/round_number_label_script.gd" id="3_hbe44"]
+[ext_resource type="Script" path="res://scenes/signals/listeners/derived_listeners/RoundNumberListener.gd" id="4_npkwy"]
+[ext_resource type="Script" path="res://scripts/round_goal_label_script.gd" id="5_uqm30"]
+[ext_resource type="Script" path="res://scripts/round_label_signals_listener.gd" id="6_nkapr"]
+[ext_resource type="Script" path="res://scenes/time_control.gd" id="7_dyk5o"]
+
+[sub_resource type="GDScript" id="GDScript_wt86j"]
+resource_name = "starting_round"
+script/source = "extends Label
+
+@export var time_controller : TimeControl
+
+func round_number_change(round_number):
+	visible = true
+	print(\"HERE!!\")
+	text = \"STARTING ROUND: %d \" % [round_number]
+	await time_controller.wait_for(6)
+	visible = false
+	pass
+	
+func new_round(ticks):
+	visible = true
+	time_controller.wait_for(ticks)
+	visible = false
+	pass
+"
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -11,15 +37,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="StatsContrainer" type="VBoxContainer" parent="."]
+self_modulate = Color(1, 0.223529, 1, 1)
 layout_mode = 0
-offset_left = 994.0
-offset_top = 16.0
-offset_right = 1139.0
-offset_bottom = 39.0
+offset_left = 10.0
+offset_top = 6.0
+offset_right = 162.0
+offset_bottom = 202.0
+
+[node name="RoundNumber" type="Label" parent="StatsContrainer"]
+layout_mode = 2
 text = "Zombies killed: 0"
+uppercase = true
+script = ExtResource("3_hbe44")
+
+[node name="RoundNumberSignalsListener" type="Node" parent="StatsContrainer/RoundNumber"]
+script = ExtResource("4_npkwy")
+
+[node name="RoundGoal" type="Label" parent="StatsContrainer"]
+layout_mode = 2
+text = "ROUND GOAL: 0/0"
+uppercase = true
+script = ExtResource("5_uqm30")
+
+[node name="RoundGoalSignalsListener" type="Node" parent="StatsContrainer/RoundGoal"]
+script = ExtResource("6_nkapr")
+
+[node name="TotalZombiesKilled" type="Label" parent="StatsContrainer"]
+layout_mode = 2
+text = "Total zombies killed: 0"
 uppercase = true
 script = ExtResource("1_rsf3b")
 
-[node name="UiTotalZombiesKilledListener" type="Node" parent="Label"]
-script = ExtResource("3_5mr6v")
+[node name="UiTotalZombiesKilledListener" type="Node" parent="StatsContrainer/TotalZombiesKilled"]
+script = ExtResource("2_wts2l")
+
+[node name="Round finished" type="Label" parent="." node_paths=PackedStringArray("time_controller")]
+layout_mode = 0
+offset_left = 351.0
+offset_top = 272.0
+offset_right = 506.0
+offset_bottom = 295.0
+scale = Vector2(2.92, 3.32)
+text = "STARTING ROUND X"
+script = SubResource("GDScript_wt86j")
+time_controller = NodePath("TimeControl")
+
+[node name="RoundNumberSignalsListener" type="Node" parent="Round finished"]
+script = ExtResource("4_npkwy")
+
+[node name="TimeControl" type="Node" parent="Round finished"]
+script = ExtResource("7_dyk5o")

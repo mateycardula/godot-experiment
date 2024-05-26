@@ -6,7 +6,9 @@ var round_number : int
 var enemies_in_round : int
 var zombies_killed_in_round : int
 var total_zombies_killed : int 
-@export var ui_event_publisher : UiSignalPublisher
+
+@export var publish_signal : RoundSignalPublisher
+@export var time_controller : TimeControl
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -24,17 +26,23 @@ func _process(delta):
 func zombie_killed():
 	total_zombies_killed += 1
 	zombies_killed_in_round += 1
-	ui_event_publisher.update_total_zombies_killed(total_zombies_killed)
+	publish_signal.update_total_zombies_killed(total_zombies_killed)
+	publish_signal.goal_update(zombies_killed_in_round, enemies_in_round)
 	
 	if (zombies_killed_in_round == enemies_in_round):
 		start_next_round()
 
 func start_next_round():
+	publish_signal.all_signals.ROUND_NUMBER_CHANGE.emit(round_number)
 	zombies_killed_in_round = 0
 	round_number+=1
 	enemies_in_round = (enemies_in_round * 2) - (enemies_in_round/2)
-	next_round.emit(round_number, enemies_in_round)
+	publish_signal.goal_update(zombies_killed_in_round, enemies_in_round)
+	publish_signal.all_signals.BEGIN_PREPARATIONS_FOR_NEW_ROUND.emit(6)
+	await time_controller.wait_for(6)
+	publish_signal.all_signals.NEXT_ROUND.emit(round_number, enemies_in_round)
 
+	
 func change_state(state, state_controller):
 	match state:
 		States.state.ZOMBIE_KILLED:

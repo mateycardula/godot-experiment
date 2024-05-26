@@ -1,12 +1,9 @@
-class_name ZombieSignalListener extends SignalMiddleware
-
-var zombie_signal_controller : SignalDataHolder
-var parent
+class_name RoundSignalListener extends SignalListener
 
 func _ready():
-	parent = get_parent()
-	zombie_signal_controller = find_signal_controller(self, "SignalDataHolder")
-	subscribe(_zombie_killed, zombie_signal_controller.zombie_killed_signal)
+	subscribe(_zombie_killed, 
+	all_signals.ZOMBIE_KILLED_SIGNAL)
+	subscribe(tick_test, all_signals.TICK)
 
 
 func _zombie_killed():
@@ -14,3 +11,5 @@ func _zombie_killed():
 		parent.zombie_killed()
 	pass
 
+func tick_test(wait_time):
+	print("TICK: ", wait_time)

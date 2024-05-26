@@ -1,14 +1,7 @@
-class_name ZombieSignalPublisher extends SignalMiddleware
+class_name ZombieSignalPublisher extends SignalPublisher
 
-var zombie_signal_controller : SignalDataHolder
-var parent
-
-func _ready():
-	parent = get_parent
-	zombie_signal_controller = find_signal_controller(self, "SignalDataHolder")
-
-func publish_zombie_killed():
-	zombie_signal_controller.zombie_killed_signal.emit()
+func zombie_killed():
+	all_signals.ZOMBIE_KILLED_SIGNAL.emit()
 	pass
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cp87vu6wrt3nh"]
+[gd_scene load_steps=12 format=3 uid="uid://cp87vu6wrt3nh"]
 
 [ext_resource type="Script" path="res://scripts/zombie_spawner.gd" id="1_qde77"]
 [ext_resource type="Resource" uid="uid://cyyew6ei1hx4l" path="res://resources/spawning_data/line1.tres" id="2_4wd86"]
@@ -9,10 +9,13 @@
 [ext_resource type="Resource" uid="uid://2ph6lv0asaha" path="res://scripts/ZombieData/zombie_big.tres" id="7_f7hkn"]
 [ext_resource type="Script" path="res://scripts/zombie_timer.gd" id="8_1kee8"]
 [ext_resource type="Resource" uid="uid://bd1uqoq7leseu" path="res://scripts/ZombieData/zombie_girl.tres" id="8_bj228"]
+[ext_resource type="Script" path="res://scenes/signals/listeners/derived_listeners/zombie_spawner_signals_listener/ZombieSpawnerSignalsListener.gd" id="10_oqxiq"]
+[ext_resource type="Script" path="res://scenes/time_control.gd" id="11_xc3jp"]
 
-[node name="ZombieSpawner" type="Node2D"]
+[node name="ZombieSpawner" type="Node2D" node_paths=PackedStringArray("time_controller")]
 script = ExtResource("1_qde77")
 zombie_scene = ExtResource("2_eyxmu")
+time_controller = NodePath("TimeControl")
 spawning_lines = Array[Resource("res://resources/spawning_data/spawning_data.gd")]([ExtResource("2_4wd86"), ExtResource("3_shnfm"), ExtResource("4_fbj8h")])
 zombie_data = Array[Resource("res://scripts/ZombieData/zombie_resources.gd")]([ExtResource("6_2b5wn"), ExtResource("7_f7hkn"), ExtResource("8_bj228")])
 
@@ -20,6 +23,12 @@ zombie_data = Array[Resource("res://scripts/ZombieData/zombie_resources.gd")]([E
 wait_time = 3.0
 autostart = true
 script = ExtResource("8_1kee8")
+
+[node name="ZombieSpawnerSignalsListener" type="Node" parent="."]
+script = ExtResource("10_oqxiq")
+
+[node name="TimeControl" type="Node" parent="."]
+script = ExtResource("11_xc3jp")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]

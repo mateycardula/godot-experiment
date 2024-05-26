@@ -6,4 +6,4 @@
 script = ExtResource("1_e1mvh")
 init_y = 300
 scale_ratio = 0.7
-z_index = 2
+z_index = 3

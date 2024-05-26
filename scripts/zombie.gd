@@ -4,7 +4,8 @@ class_name Zombie extends CharacterBody2D
 @onready var animation_controller : AnimatedSprite2D = $AmimationsNode
 @export var zombie_data : ZombieData
 @export var health_controller : HealthController
-@export var zombie_signal_publisher : ZombieSignalPublisher
+@export var publish_signal: SignalPublisher
+@export var time_control : TimeControl
 	
 var health : int 
 var speed : int
@@ -33,7 +34,6 @@ func setup_zombie():
 	is_alive = true
 	health_controller.modulate.a = 0.5
 	health_controller.initialize_health(zombie_data.health)
-
 	pass	
 
 func damage(_damage: int):
@@ -44,8 +44,9 @@ func die():
 	speed=0
 	animation_controller.play("die")
 	var timer = Timer.new()
-	zombie_signal_publisher.publish_zombie_killed()
-	await wait_for(animation_controller.animation.length())
+	publish_signal.zombie_killed()
+	await time_control.wait_for(4)
+	#await wait_for(animation_controller.animation.length())
 	self.queue_free()
 
 func wait_for(seconds : float):
