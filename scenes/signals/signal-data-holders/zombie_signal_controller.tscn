@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfg6v8dpramnw"]
+
+[ext_resource type="Script" path="res://scripts/zombie_signal_controller.gd" id="1_gvmkr"]
+
+[node name="ZombieSignalController" type="Node"]
+script = ExtResource("1_gvmkr")

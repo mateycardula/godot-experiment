@@ -1,14 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwf70u8nih40"]
+[gd_scene load_steps=11 format=3 uid="uid://dwf70u8nih40"]
 
 [ext_resource type="PackedScene" uid="uid://cp87vu6wrt3nh" path="res://scenes/zombie_spawner.tscn" id="1_8vyds"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ytuu0"]
+[ext_resource type="Script" path="res://scripts/zombie_signal_controller.gd" id="2_7vmgb"]
+[ext_resource type="PackedScene" uid="uid://b14evwsxlwdwq" path="res://scenes/ui.tscn" id="2_bx0es"]
 [ext_resource type="PackedScene" uid="uid://ctl6be17cykey" path="res://scenes/state_controller.tscn" id="2_kqar7"]
 [ext_resource type="PackedScene" uid="uid://6eoqja4linm8" path="res://scenes/timer.tscn" id="2_q28kv"]
 [ext_resource type="PackedScene" uid="uid://chc6jxdr7hie2" path="res://scenes/round_controller.tscn" id="4_kfx8u"]
 [ext_resource type="PackedScene" uid="uid://c84ljpgu2koy6" path="res://scenes/gun.tscn" id="5_jer7w"]
+[ext_resource type="Script" path="res://scripts/ui_signal_controller.gd" id="9_hy3lc"]
+[ext_resource type="Script" path="res://scripts/signal_data_holder.gd" id="10_065r1"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ytuu0")
+
+[node name="UI" parent="." instance=ExtResource("2_bx0es")]
+offset_left = -6.0
+offset_top = -2.0
+offset_right = -6.0
+offset_bottom = -2.0
+
+[node name="ZombieSignalController" type="Node" parent="."]
+script = ExtResource("2_7vmgb")
 
 [node name="StateController" parent="." instance=ExtResource("2_kqar7")]
 
@@ -21,3 +34,9 @@ position = Vector2(75, 320)
 [node name="Timer" parent="." instance=ExtResource("2_q28kv")]
 
 [node name="RoundController" parent="." instance=ExtResource("4_kfx8u")]
+
+[node name="UiSignalController" type="Node" parent="."]
+script = ExtResource("9_hy3lc")
+
+[node name="SignalDataHolder" type="Node" parent="."]
+script = ExtResource("10_065r1")

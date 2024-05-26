@@ -4,6 +4,8 @@ class_name StateListener extends Node
 var state_controller
 var parent 
 signal state_callback_signal(state)
+
+
 func _ready():
 	parent = get_parent()
 	find_state_controller()
@@ -23,9 +25,13 @@ func find_state_controller():
 	state_controller = parent.get_child(0).find_child("StateController")
 
 func _change_parent_state(state):
-	parent.change_state(state)
+	parent.change_state(state, self)
 	pass
 
 func state_change_callback(state):
 	state_callback_signal.emit(state)
+	pass
+
+func update_ui(event, data):
+	
 	pass

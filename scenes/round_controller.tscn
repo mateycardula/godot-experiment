@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://chc6jxdr7hie2"]
+[gd_scene load_steps=5 format=3 uid="uid://chc6jxdr7hie2"]
 
 [ext_resource type="Script" path="res://scripts/round_controller.gd" id="1_8xwuy"]
+[ext_resource type="Script" path="res://scripts/state_component.gd" id="2_ycghc"]
+[ext_resource type="Script" path="res://scripts/zombie_signal_listener.gd" id="3_lg55s"]
+[ext_resource type="PackedScene" uid="uid://b5q4kpb52dtkf" path="res://scenes/signals/publishers/ui_signal_publisher.tscn" id="4_klukr"]
 
-[node name="RoundController" type="Node"]
+[node name="RoundController" type="Node" node_paths=PackedStringArray("ui_event_publisher")]
 script = ExtResource("1_8xwuy")
+ui_event_publisher = NodePath("UiSignalPublisher")
+
+[node name="StateListener" type="Node" parent="."]
+script = ExtResource("2_ycghc")
+
+[node name="ZombieSignalListener" type="Node" parent="."]
+script = ExtResource("3_lg55s")
+
+[node name="UiSignalPublisher" parent="." instance=ExtResource("4_klukr")]

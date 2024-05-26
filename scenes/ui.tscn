@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://b14evwsxlwdwq"]
+
+[ext_resource type="Script" path="res://scripts/total_zombies_killed_label.gd" id="1_rsf3b"]
+[ext_resource type="Script" path="res://events/ui_change/total_zombies_killed_listener.gd" id="3_5mr6v"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 994.0
+offset_top = 16.0
+offset_right = 1139.0
+offset_bottom = 39.0
+text = "Zombies killed: 0"
+uppercase = true
+script = ExtResource("1_rsf3b")
+
+[node name="UiTotalZombiesKilledListener" type="Node" parent="Label"]
+script = ExtResource("3_5mr6v")

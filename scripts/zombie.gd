@@ -4,6 +4,8 @@ class_name Zombie extends CharacterBody2D
 @onready var animation_controller : AnimatedSprite2D = $AmimationsNode
 @export var zombie_data : ZombieData
 @export var health_controller : HealthController
+@export var zombie_signal_publisher : ZombieSignalPublisher
+	
 var health : int 
 var speed : int
 var is_alive : bool
@@ -42,7 +44,7 @@ func die():
 	speed=0
 	animation_controller.play("die")
 	var timer = Timer.new()
-	zombie_died.emit()
+	zombie_signal_publisher.publish_zombie_killed()
 	await wait_for(animation_controller.animation.length())
 	self.queue_free()
 
@@ -55,7 +57,7 @@ func wait_for(seconds : float):
 	await timer.timeout
 	timer.queue_free()
 	
-func change_state(state):
+func change_state(state, state_controller):
 	match state:
 		States.state.PAUSE:
 			print("ZOMBIE PAUSED")
