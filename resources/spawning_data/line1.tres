@@ -6,4 +6,4 @@
 script = ExtResource("1_et7fb")
 init_y = 400
 scale_ratio = 0.6
-z_index = 2
+z_index = 0

@@ -2,10 +2,25 @@ class_name Round extends Node
 
 signal next_round(round_number : int, enemies_in_round : int)
 
-var round_number : int
-var enemies_in_round : int
-var zombies_killed_in_round : int
-var total_zombies_killed : int 
+var round_number : int :
+	set(value):
+		round_number = value
+		publish_signal.all_signals.ROUND_NUMBER_UPDATE.emit(round_number)
+		
+var enemies_in_round : int :
+	set(value):
+		enemies_in_round = value
+		publish_signal.all_signals.ROUND_GOAL_UPDATE.emit(enemies_in_round)
+		
+var zombies_killed_in_round : int:
+	set(value):
+		zombies_killed_in_round = value
+		publish_signal.all_signals.ROUND_PROGRESS_UPDATE.emit(zombies_killed_in_round)
+
+var total_zombies_killed : int:
+	set(value):
+		total_zombies_killed = value
+		publish_signal.all_signals.TOTAL_ZOMBIES_KILLED_UPDATE.emit(total_zombies_killed)
 
 @export var publish_signal : RoundSignalPublisher
 @export var time_controller : TimeControl
@@ -26,21 +41,14 @@ func _process(delta):
 func zombie_killed():
 	total_zombies_killed += 1
 	zombies_killed_in_round += 1
-	publish_signal.update_total_zombies_killed(total_zombies_killed)
-	publish_signal.goal_update(zombies_killed_in_round, enemies_in_round)
-	
 	if (zombies_killed_in_round == enemies_in_round):
 		start_next_round()
 
 func start_next_round():
-	publish_signal.all_signals.ROUND_NUMBER_CHANGE.emit(round_number)
-	zombies_killed_in_round = 0
-	round_number+=1
-	enemies_in_round = (enemies_in_round * 2) - (enemies_in_round/2)
-	publish_signal.goal_update(zombies_killed_in_round, enemies_in_round)
+	set_round_data()
 	publish_signal.all_signals.BEGIN_PREPARATIONS_FOR_NEW_ROUND.emit(6)
 	await time_controller.wait_for(6)
-	publish_signal.all_signals.NEXT_ROUND.emit(round_number, enemies_in_round)
+	publish_signal.all_signals.START_ROUND.emit()
 
 	
 func change_state(state, state_controller):
@@ -48,4 +56,8 @@ func change_state(state, state_controller):
 		States.state.ZOMBIE_KILLED:
 			state_controller.update_ui()
 	pass
-	
+
+func set_round_data():
+	zombies_killed_in_round = 0
+	round_number = round_number+1
+	enemies_in_round = (enemies_in_round * 2) - (enemies_in_round/2)

@@ -8,3 +8,4 @@ script = ExtResource("1_a7bfq")
 damage = 50
 cosecutive_shots = 1
 animation = ExtResource("1_5p4gq")
+ticks_per_shot = 6

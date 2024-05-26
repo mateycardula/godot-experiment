@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b14evwsxlwdwq"]
+[gd_scene load_steps=10 format=3 uid="uid://b14evwsxlwdwq"]
 
 [ext_resource type="Script" path="res://scripts/total_zombies_killed_label.gd" id="1_rsf3b"]
 [ext_resource type="Script" path="res://scenes/signals/listeners/derived_listeners/total_zombies_killed_listener/total_zombies_killed_listener.gd" id="2_wts2l"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/round_goal_label_script.gd" id="5_uqm30"]
 [ext_resource type="Script" path="res://scripts/round_label_signals_listener.gd" id="6_nkapr"]
 [ext_resource type="Script" path="res://scenes/time_control.gd" id="7_dyk5o"]
+[ext_resource type="Script" path="res://scenes/RoundFinishedSignalsListener.gd" id="8_qf1v0"]
 
 [sub_resource type="GDScript" id="GDScript_wt86j"]
 resource_name = "starting_round"
@@ -14,22 +15,23 @@ script/source = "extends Label
 
 @export var time_controller : TimeControl
 
-func round_number_change(round_number):
+var round_number : int : 
+	set(value):
+		round_number = value
+		
+
+func announce_new_round(ticks : int):
 	visible = true
-	print(\"HERE!!\")
 	text = \"STARTING ROUND: %d \" % [round_number]
 	await time_controller.wait_for(6)
 	visible = false
-	pass
-	
-func new_round(ticks):
-	visible = true
-	time_controller.wait_for(ticks)
-	visible = false
-	pass
+
+func set_round_number(value):
+	round_number = value
 "
 
 [node name="UI" type="Control"]
+top_level = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -83,8 +85,8 @@ text = "STARTING ROUND X"
 script = SubResource("GDScript_wt86j")
 time_controller = NodePath("TimeControl")
 
-[node name="RoundNumberSignalsListener" type="Node" parent="Round finished"]
-script = ExtResource("4_npkwy")
-
 [node name="TimeControl" type="Node" parent="Round finished"]
 script = ExtResource("7_dyk5o")
+
+[node name="RoundFinishedSignalsListener" type="Node" parent="Round finished"]
+script = ExtResource("8_qf1v0")

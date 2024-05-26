@@ -10,6 +10,9 @@ var differing_zombies
 var max_zombies
 var spawned_zombies
 
+var round_number
+var enemies_in_round
+
 signal test_signal
 
 func _ready(): 	
@@ -25,7 +28,7 @@ func _process(delta):
 	#pass # Replace with function body.
 
 func spawn_zombie(): 
-	if(spawned_zombies<max_zombies):
+	if(spawned_zombies<enemies_in_round):
 		await time_controller.wait_for_random(2, 6)
 		var new_zombie = zombie_scene.instantiate()
 		set_zombie_data(new_zombie)
@@ -35,9 +38,8 @@ func spawn_zombie():
 		spawn_zombie()
 
 
-func start_round(round_number, zombies_number):
+func start_round():
 	differing_zombies = clamp(round_number-1, 0, zombie_data.size() - 1)
-	max_zombies = zombies_number
 	spawned_zombies = 0
 	spawn_zombie()
 	print("ROUND NUMBER: ", round_number)
@@ -49,3 +51,8 @@ func set_zombie_data(zombie):
 	zombie.z_index = spawn_line.z_index
 	zombie.scale *= spawn_line.scale_ratio
 	
+func set_round_number(_round_number : int):
+	round_number = _round_number
+	
+func set_enemies_in_round(_enemies_in_round : int):
+	enemies_in_round = _enemies_in_round
