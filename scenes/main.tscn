@@ -3,24 +3,26 @@
 [ext_resource type="PackedScene" uid="uid://cp87vu6wrt3nh" path="res://scenes/zombie_spawner.tscn" id="1_8vyds"]
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_ytuu0"]
 [ext_resource type="PackedScene" uid="uid://b14evwsxlwdwq" path="res://scenes/ui.tscn" id="2_bx0es"]
-[ext_resource type="PackedScene" uid="uid://ctl6be17cykey" path="res://scenes/state_controller.tscn" id="2_kqar7"]
 [ext_resource type="PackedScene" uid="uid://6eoqja4linm8" path="res://scenes/timer.tscn" id="2_q28kv"]
 [ext_resource type="PackedScene" uid="uid://chc6jxdr7hie2" path="res://scenes/round_controller.tscn" id="4_kfx8u"]
 [ext_resource type="PackedScene" uid="uid://c84ljpgu2koy6" path="res://scenes/gun.tscn" id="5_jer7w"]
 [ext_resource type="PackedScene" uid="uid://b7307b2j0cmkd" path="res://scenes/clock.tscn" id="9_7ticx"]
+[ext_resource type="PackedScene" uid="uid://b2k1mtyayg8pd" path="res://scenes/player.tscn" id="10_8gk31"]
 [ext_resource type="Script" path="res://scripts/signal_data_holder.gd" id="10_065r1"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(-3, 0)
 script = ExtResource("1_ytuu0")
 
-[node name="UI" parent="." instance=ExtResource("2_bx0es")]
-offset_left = -6.0
-offset_top = -2.0
-offset_right = -6.0
-offset_bottom = -2.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="StateController" parent="." instance=ExtResource("2_kqar7")]
+[node name="UI" parent="CanvasLayer" instance=ExtResource("2_bx0es")]
+top_level = false
+light_mask = 2
+offset_left = -9.0
+offset_top = -2.0
+offset_right = -9.0
+offset_bottom = -2.0
 
 [node name="ZombieSpawner" parent="." instance=ExtResource("1_8vyds")]
 position = Vector2(1047, 618)
@@ -53,3 +55,5 @@ scale = Vector2(29.7198, 7.61379)
 color = Color(0.353893, 0.516281, 0.559127, 1)
 
 [node name="Clock" parent="." instance=ExtResource("9_7ticx")]
+
+[node name="Player" parent="." instance=ExtResource("10_8gk31")]

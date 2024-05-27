@@ -7,6 +7,7 @@ func _ready():
 	all_signals.BEGIN_PREPARATIONS_FOR_NEW_ROUND)
 
 func round_number_update(round_number : int):
+	print("UPDATE ROUND NUMBER")
 	parent.set_round_number(round_number)
 
 func announce_new_round(ticks:int):

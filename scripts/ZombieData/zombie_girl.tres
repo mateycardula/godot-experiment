@@ -10,3 +10,7 @@ speed = 90
 size = 0.7
 z_offset = -1
 animation = ExtResource("1_gmowv")
+gold_drop = {
+"From": 30,
+"To": 40
+}

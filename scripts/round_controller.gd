@@ -5,6 +5,7 @@ signal next_round(round_number : int, enemies_in_round : int)
 var round_number : int :
 	set(value):
 		round_number = value
+		print("SHOULD EMIT round number change")
 		publish_signal.all_signals.ROUND_NUMBER_UPDATE.emit(round_number)
 		
 var enemies_in_round : int :
@@ -46,6 +47,7 @@ func zombie_killed():
 
 func start_next_round():
 	set_round_data()
+	
 	publish_signal.all_signals.BEGIN_PREPARATIONS_FOR_NEW_ROUND.emit(6)
 	await time_controller.wait_for(6)
 	publish_signal.all_signals.START_ROUND.emit()

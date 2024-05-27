@@ -5,8 +5,6 @@ var zombie_spawner
 func _ready():
 	zombie_spawner = get_node("ZombieSpawner")
 	zombie_spawner.test_signal.connect(print_success)
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

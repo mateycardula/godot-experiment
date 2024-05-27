@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b14evwsxlwdwq"]
+[gd_scene load_steps=19 format=3 uid="uid://b14evwsxlwdwq"]
 
 [ext_resource type="Script" path="res://scripts/total_zombies_killed_label.gd" id="1_rsf3b"]
+[ext_resource type="Script" path="res://scripts/general_ui.gd" id="1_x2df7"]
 [ext_resource type="Script" path="res://scenes/signals/listeners/derived_listeners/total_zombies_killed_listener/total_zombies_killed_listener.gd" id="2_wts2l"]
 [ext_resource type="Script" path="res://scripts/round_number_label_script.gd" id="3_hbe44"]
 [ext_resource type="Script" path="res://scenes/signals/listeners/derived_listeners/RoundNumberListener.gd" id="4_npkwy"]
@@ -8,6 +9,10 @@
 [ext_resource type="Script" path="res://scripts/round_label_signals_listener.gd" id="6_nkapr"]
 [ext_resource type="Script" path="res://scenes/time_control.gd" id="7_dyk5o"]
 [ext_resource type="Script" path="res://scenes/RoundFinishedSignalsListener.gd" id="8_qf1v0"]
+[ext_resource type="Script" path="res://scripts/general_ui_signal_listener.gd" id="10_en5h7"]
+[ext_resource type="Script" path="res://scenes/pre_round_panel.gd" id="11_yk05m"]
+[ext_resource type="Script" path="res://scenes/UpgradesSignalListener.gd" id="12_hc7lr"]
+[ext_resource type="Script" path="res://scenes/signals/publishers/SignalPublisher.gd" id="13_sqyl5"]
 
 [sub_resource type="GDScript" id="GDScript_wt86j"]
 resource_name = "starting_round"
@@ -30,22 +35,93 @@ func set_round_number(value):
 	round_number = value
 "
 
-[node name="UI" type="Control"]
+[sub_resource type="GDScript" id="GDScript_djiky"]
+resource_name = "GoldUiLabel"
+script/source = "extends Label
+
+var gold : int:
+	set(value):
+		gold = value
+		draw()
+		
+func _ready():
+	self_modulate = Color.GOLD
+
+func draw():
+		text = \"GOLD: %d \" % [gold]
+
+func set_gold(value):
+	gold = value
+"
+
+[sub_resource type="GDScript" id="GDScript_bu7w6"]
+resource_name = "GoldSignalListener"
+script/source = "extends SignalListener
+
+func _ready():
+	subscribe(update_gold_ui,
+	all_signals.GOLD_UPDATE)
+	pass
+
+func update_gold_ui(gold : int):
+	parent.set_gold(gold)
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_q4u2n"]
+script/source = "extends Button
+
+var maxed_out = false :
+	set(value):
+		maxed_out = value
+		disabled = value
+
+func draw_upgrade(upgrade : Upgrade):
+	if(not maxed_out):
+		text = \"Damage + %d (%d gold)\" % [upgrade.d_value, upgrade.cost]
+	else:
+		text = \"DAMAGE UPGRADES MAXED OUT\"
+	pass
+	
+"
+
+[sub_resource type="GDScript" id="GDScript_t281k"]
+script/source = "extends Button
+
+var maxed_out = false :
+	set(value):
+		maxed_out = value
+		disabled = value
+
+func draw_upgrade(upgrade : Upgrade):
+	if(not maxed_out):
+		text = \"Fire rate level:  %d (%d gold)\" % [upgrade.level, upgrade.cost]
+	else:
+		text = \"FIRE RATE UPGRADES MAXED OUT\"
+	pass
+"
+
+[node name="UI" type="Control" node_paths=PackedStringArray("time_controller")]
 top_level = true
+visibility_layer = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_x2df7")
+time_controller = NodePath("TimeControl")
 
 [node name="StatsContrainer" type="VBoxContainer" parent="."]
 self_modulate = Color(1, 0.223529, 1, 1)
+top_level = true
+visibility_layer = 2
 layout_mode = 0
-offset_left = 10.0
-offset_top = 6.0
-offset_right = 162.0
-offset_bottom = 202.0
+offset_left = 933.0
+offset_top = 16.0
+offset_right = 1132.0
+offset_bottom = 212.0
 
 [node name="RoundNumber" type="Label" parent="StatsContrainer"]
 layout_mode = 2
@@ -75,6 +151,8 @@ script = ExtResource("1_rsf3b")
 script = ExtResource("2_wts2l")
 
 [node name="Round finished" type="Label" parent="." node_paths=PackedStringArray("time_controller")]
+top_level = true
+visibility_layer = 3
 layout_mode = 0
 offset_left = 351.0
 offset_top = 272.0
@@ -90,3 +168,64 @@ script = ExtResource("7_dyk5o")
 
 [node name="RoundFinishedSignalsListener" type="Node" parent="Round finished"]
 script = ExtResource("8_qf1v0")
+
+[node name="Gold" type="Label" parent="."]
+top_level = true
+visibility_layer = 2
+layout_mode = 0
+offset_left = 11.0
+offset_top = 13.0
+offset_right = 70.0
+offset_bottom = 36.0
+text = "GOLD X"
+script = SubResource("GDScript_djiky")
+
+[node name="GoldSignalListener" type="Node" parent="Gold"]
+script = SubResource("GDScript_bu7w6")
+
+[node name="GeneralUiSignalListener" type="Node" parent="."]
+script = ExtResource("10_en5h7")
+
+[node name="TimeControl" type="Node" parent="."]
+script = ExtResource("7_dyk5o")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(0, 0.37336, 0.321158, 1)
+layout_mode = 0
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 155.0
+offset_bottom = 118.0
+pivot_offset = Vector2(2, 31)
+
+[node name="Upgrades" type="GridContainer" parent="PanelContainer" node_paths=PackedStringArray("dmg_upgrade_btn", "fire_rate_upgrade_btn", "publish_signal")]
+layout_mode = 2
+script = ExtResource("11_yk05m")
+dmg_upgrade_btn = NodePath("DMG_UPGRADE")
+fire_rate_upgrade_btn = NodePath("FIRE_RATE_UPGRADE")
+publish_signal = NodePath("SignalPublisher")
+
+[node name="Label" type="Label" parent="PanelContainer/Upgrades"]
+self_modulate = Color(0.175863, 0.600898, 0.498113, 1)
+layout_mode = 2
+text = "UPGRADES"
+horizontal_alignment = 1
+
+[node name="DMG_UPGRADE" type="Button" parent="PanelContainer/Upgrades"]
+layout_mode = 2
+text = "Upgrade fire rate"
+script = SubResource("GDScript_q4u2n")
+
+[node name="FIRE_RATE_UPGRADE" type="Button" parent="PanelContainer/Upgrades"]
+layout_mode = 2
+text = "Upgrade damage"
+script = SubResource("GDScript_t281k")
+
+[node name="UpgradesSignalListener" type="Node" parent="PanelContainer/Upgrades"]
+script = ExtResource("12_hc7lr")
+
+[node name="SignalPublisher" type="Node" parent="PanelContainer/Upgrades"]
+script = ExtResource("13_sqyl5")
+
+[connection signal="pressed" from="PanelContainer/Upgrades/DMG_UPGRADE" to="PanelContainer/Upgrades" method="_on_dmg_upgrade_pressed"]
+[connection signal="pressed" from="PanelContainer/Upgrades/FIRE_RATE_UPGRADE" to="PanelContainer/Upgrades" method="_on_fire_rate_upgrade_pressed"]

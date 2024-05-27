@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=2 format=3 uid="uid://yg4lt14ube2a"]
+
+[ext_resource type="Script" path="res://resources/gun_upgrades/upgrade_resource.gd" id="1_r0g24"]
+
+[resource]
+script = ExtResource("1_r0g24")
+d_value = 2
+level = 3
+unlocked = false
+cost = 300

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://71sf8nw52upe"]
+
+[ext_resource type="Script" path="res://scripts/gun_upgrades.gd" id="1_5wd63"]
+[ext_resource type="Resource" uid="uid://os7facvnf8qr" path="res://resources/gun_upgrades/pistol_dmg_lvl_1.tres" id="2_p02u8"]
+
+[node name="GunUpgrades" type="Node"]
+script = ExtResource("1_5wd63")
+dmg_upgrades = Array[Resource("res://resources/gun_upgrades/upgrade_resource.gd")]([ExtResource("2_p02u8")])

@@ -43,20 +43,8 @@ func die():
 	is_alive = false
 	speed=0
 	animation_controller.play("die")
-	var timer = Timer.new()
 	publish_signal.zombie_killed()
-	await time_control.wait_for(4)
-	#await wait_for(animation_controller.animation.length())
-	self.queue_free()
-
-func wait_for(seconds : float):
-	var timer : Timer
-	timer = Timer.new()
-	add_child(timer)
-	timer.start(2.0)
-	timer.paused = false
-	await timer.timeout
-	timer.queue_free()
+	drop_loot()
 	
 func change_state(state, state_controller):
 	match state:
@@ -66,4 +54,14 @@ func change_state(state, state_controller):
 			print("NO SUCH STATE")		
 	pass
 
+func drop_loot():
+	publish_signal.drop_loot_signal(
+		calculate_gold_drop(),
+		global_position)
+	pass
 
+func calculate_gold_drop() -> int:
+	return randi_range(
+		zombie_data.gold_drop.get("From"), 
+		zombie_data.gold_drop.get("To"))
+	pass

@@ -39,6 +39,7 @@ func spawn_zombie():
 
 
 func start_round():
+	queue_free_zombies()
 	differing_zombies = clamp(round_number-1, 0, zombie_data.size() - 1)
 	spawned_zombies = 0
 	spawn_zombie()
@@ -53,6 +54,11 @@ func set_zombie_data(zombie):
 	
 func set_round_number(_round_number : int):
 	round_number = _round_number
-	
+
 func set_enemies_in_round(_enemies_in_round : int):
 	enemies_in_round = _enemies_in_round
+
+func queue_free_zombies():
+	for child in get_children():
+		if(child.is_in_group("Zombies")):
+			child.queue_free()

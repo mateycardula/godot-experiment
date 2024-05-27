@@ -1,15 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://c84ljpgu2koy6"]
+[gd_scene load_steps=8 format=3 uid="uid://c84ljpgu2koy6"]
 
 [ext_resource type="Script" path="res://scripts/Guns/Gun.gd" id="1_oaxc6"]
 [ext_resource type="Resource" uid="uid://uonwna2fcyex" path="res://resources/gun_data/pistol.tres" id="2_bvjjx"]
 [ext_resource type="Texture2D" uid="uid://d376qhvyluvot" path="res://assets/Guns/Crosshairs/Crosshair Solid (19).png" id="3_t0eyw"]
+[ext_resource type="PackedScene" uid="uid://bqqrdwp3on6k" path="res://scenes/time_control.tscn" id="4_a66cy"]
+[ext_resource type="Script" path="res://scenes/gun_signal_listener.gd" id="5_lksxr"]
+[ext_resource type="Script" path="res://scenes/signals/publishers/SignalPublisher.gd" id="6_kxx6r"]
+[ext_resource type="Script" path="res://scripts/damage_component.gd" id="7_ma2xj"]
 
-[node name="Gun" type="Node2D" node_paths=PackedStringArray("animation_controller", "crosshair")]
+[node name="Gun" type="Node2D" node_paths=PackedStringArray("time_controller", "animation_controller", "crosshair", "publish_signal", "damage_component")]
 scale = Vector2(2, 2)
 script = ExtResource("1_oaxc6")
+time_controller = NodePath("TimeControl")
 gun_data = ExtResource("2_bvjjx")
 animation_controller = NodePath("AnimatedSprite2D")
 crosshair = NodePath("Crosshair")
+publish_signal = NodePath("SignalPublisher")
+damage_component = NodePath("Damage")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 animation = &""
@@ -22,5 +29,16 @@ modulate = Color(0.858567, 0.274124, 0.465547, 1)
 top_level = true
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("3_t0eyw")
+
+[node name="TimeControl" parent="." instance=ExtResource("4_a66cy")]
+
+[node name="GunSignalListener" type="Node" parent="."]
+script = ExtResource("5_lksxr")
+
+[node name="SignalPublisher" type="Node" parent="."]
+script = ExtResource("6_kxx6r")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("7_ma2xj")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
