@@ -71,13 +71,8 @@ func update_gold_ui(gold : int):
 [sub_resource type="GDScript" id="GDScript_q4u2n"]
 script/source = "extends Button
 
-var maxed_out = false :
-	set(value):
-		maxed_out = value
-		disabled = value
-
 func draw_upgrade(upgrade : Upgrade):
-	if(not maxed_out):
+	if(upgrade != null):
 		text = \"Damage + %d (%d gold)\" % [upgrade.d_value, upgrade.cost]
 	else:
 		text = \"DAMAGE UPGRADES MAXED OUT\"
@@ -88,13 +83,8 @@ func draw_upgrade(upgrade : Upgrade):
 [sub_resource type="GDScript" id="GDScript_t281k"]
 script/source = "extends Button
 
-var maxed_out = false :
-	set(value):
-		maxed_out = value
-		disabled = value
-
 func draw_upgrade(upgrade : Upgrade):
-	if(not maxed_out):
+	if(upgrade != null):
 		text = \"Fire rate level:  %d (%d gold)\" % [upgrade.level, upgrade.cost]
 	else:
 		text = \"FIRE RATE UPGRADES MAXED OUT\"

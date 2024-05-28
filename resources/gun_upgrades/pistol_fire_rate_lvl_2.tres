@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_vodyl")
-d_value = 2
+d_value = -2
 level = 2
 unlocked = false
-cost = 99
+cost = 100

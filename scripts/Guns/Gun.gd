@@ -15,12 +15,11 @@ var can_shoot : bool = true
 var gun_damage_upgrades : Array[Upgrade] :
 	set(array):
 		gun_damage_upgrades = array
-		publish_signal.all_signals.GUN_DAMAGE_UPGRADE_LIST_UPDATE.emit(gun_damage_upgrades)
-		
+		publish_signal.all_signals.CURRENT_DAMAGE_UPGRADE.emit(gun_damage_upgrades.front())
+
 var fire_rate_upgrades : Array[Upgrade] :
 	set(array):
 		fire_rate_upgrades = array
-		publish_signal.all_signals.GUN_FIRE_RATE_UPGRADE_LIST_UPDATE.emit(fire_rate_upgrades)
 		
 var ticks_left_to_fire : int :
 	set(value):
@@ -32,6 +31,8 @@ var ticks_left_to_fire : int :
 			
 func _ready():
 	setup_gun()
+	publish_signal.all_signals.CURRENT_DAMAGE_UPGRADE.emit(gun_damage_upgrades.front())
+	publish_signal.all_signals.CURRENT_FIRE_RATE_UPGRADE.emit(fire_rate_upgrades.front())
 	pass 
 	
 func _process(delta):
@@ -53,7 +54,6 @@ func get_closest_enemy():
 
 func shoot(enemy):
 	animation_controller.play()
-	enemy.damage(damage)
 	damage_component.hit(enemy)
 	ticks_left_to_fire = fire_rate
 	pass
@@ -70,12 +70,14 @@ func aim() -> Object:
 		crosshair.visible = false
 		return null
 
+		
+
 func update_fire_rate():
 	ticks_left_to_fire-=1
 	pass
 
 func setup_gun():
-	damage = gun_data.damage
+	damage_component.damage = gun_data.damage
 	fire_rate = gun_data.ticks_per_shot
 	gun_damage_upgrades = gun_data.dmg_upgrades
 	fire_rate_upgrades = gun_data.fire_rate_upgrades
@@ -83,13 +85,16 @@ func setup_gun():
 	pass
 
 func upgrade_damage(d_damage : int):
-	damage += d_damage
-	print("NEW DAMAGE ", damage)
-	pass
+	var upgrade_to_apply : Upgrade = gun_damage_upgrades.pop_front()
+	publish_signal.all_signals.SPEND_GOLD.emit(upgrade_to_apply.cost)
+	damage_component.damage += upgrade_to_apply.d_value
+	publish_signal.all_signals.CURRENT_DAMAGE_UPGRADE.emit(gun_damage_upgrades.front())
 
 func upgrade_fire_rate(d_fire_rate : int):
-	fire_rate -= d_fire_rate
-	print("NEW FIRE RATE ", fire_rate)
+	var upgrade_to_apply : Upgrade = fire_rate_upgrades.pop_front()
+	publish_signal.all_signals.SPEND_GOLD.emit(upgrade_to_apply.cost)
+	fire_rate -= upgrade_to_apply.d_value
+	publish_signal.all_signals.CURRENT_FIRE_RATE_UPGRADE.emit(fire_rate_upgrades.front())
 
 func set_damage_upgrades (array):
 	gun_damage_upgrades = array
@@ -97,4 +102,10 @@ func set_damage_upgrades (array):
 func set_fire_rate_upgrades (array):
 	fire_rate_upgrades = array
 
-	
+func upgrade(upgrade_type : UpgradeEnums.type):
+	match upgrade_type:
+		UpgradeEnums.type.DAMAGE:
+			upgrade_damage(0)
+		UpgradeEnums.type.FIRE_RATE:
+			upgrade_fire_rate(0)
+

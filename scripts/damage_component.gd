@@ -7,9 +7,10 @@ var damage : int :
 		damage = value
 
 func hit (object : Object):
-	var enemy_health_component = object.find_child("HealthController")
+	var enemy_health_component : HealthController = object.find_child("HealthController")
 	if enemy_health_component != null:
-		print("CAN ATTACK ", object)
+		enemy_health_component.damage(damage)
 	pass
 
+ 
 

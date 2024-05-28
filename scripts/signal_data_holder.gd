@@ -23,9 +23,7 @@ signal GOLD_UPDATE(gold : int)
 signal SPEND_GOLD (gold : int)
 
 ##GUN RELATED SIGNALS
-signal GUN_DAMAGE_UPGRADE_LIST_UPDATE(upgrades : Array[Upgrade])
-signal GUN_FIRE_RATE_UPGRADE_LIST_UPDATE(upgrades : Array[Upgrade])
-signal GUN_DAMAGE_LIST_CALLBACK(upgrades : Array[Upgrade])
-signal GUN_FIRE_RATE_LIST_CALLBACK(upgrades : Array[Upgrade])
-signal UPGRADE_GUN_DAMAGE(d_damage : int)
-signal UPGRADE_FIRE_RATE(d_rate : int)
+
+signal UPGRADE_GUN (upgrade_type : UpgradeEnums.type)
+signal CURRENT_DAMAGE_UPGRADE(upgrade)
+signal CURRENT_FIRE_RATE_UPGRADE(upgrade)

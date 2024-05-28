@@ -1,12 +1,9 @@
-[gd_resource type="Resource" script_class="GunData" load_steps=10 format=3 uid="uid://uonwna2fcyex"]
+[gd_resource type="Resource" script_class="GunData" load_steps=7 format=3 uid="uid://uonwna2fcyex"]
 
 [ext_resource type="SpriteFrames" uid="uid://dixcp5lqoo4ig" path="res://assets/Guns/Pistol/Animations/pistol.tres" id="1_5p4gq"]
 [ext_resource type="Script" path="res://resources/gun_data/gun_resource.gd" id="1_a7bfq"]
 [ext_resource type="Resource" uid="uid://os7facvnf8qr" path="res://resources/gun_upgrades/pistol_dmg_lvl_1.tres" id="2_5ww16"]
-[ext_resource type="Resource" uid="uid://cpcrxtwfgehcr" path="res://resources/gun_upgrades/pistol_dmg_lvl_2.tres" id="3_k0ayo"]
-[ext_resource type="Resource" uid="uid://b8lo1cqrirjku" path="res://resources/gun_upgrades/pistol_dmg_lvl_3.tres" id="4_fncff"]
 [ext_resource type="Resource" uid="uid://ccwvagygurh5q" path="res://resources/gun_upgrades/pistol_fire_rate_lvl_1.tres" id="4_gwd6b"]
-[ext_resource type="Resource" uid="uid://dgon07urdgm3f" path="res://resources/gun_upgrades/pistol_dmg_lvl_4.tres" id="5_4v18o"]
 [ext_resource type="Resource" uid="uid://dhb8bis6ghelo" path="res://resources/gun_upgrades/pistol_fire_rate_lvl_2.tres" id="7_f2dki"]
 [ext_resource type="Resource" uid="uid://yg4lt14ube2a" path="res://resources/gun_upgrades/pistol_fire_rate_lvl_3.tres" id="8_tex6q"]
 
@@ -16,5 +13,5 @@ damage = 50
 cosecutive_shots = 1
 animation = ExtResource("1_5p4gq")
 ticks_per_shot = 8
-dmg_upgrades = Array[Resource("res://resources/gun_upgrades/upgrade_resource.gd")]([ExtResource("2_5ww16"), ExtResource("3_k0ayo"), ExtResource("4_fncff"), ExtResource("5_4v18o")])
+dmg_upgrades = Array[Resource("res://resources/gun_upgrades/upgrade_resource.gd")]([ExtResource("2_5ww16")])
 fire_rate_upgrades = Array[Resource("res://resources/gun_upgrades/upgrade_resource.gd")]([ExtResource("4_gwd6b"), ExtResource("7_f2dki"), ExtResource("8_tex6q")])

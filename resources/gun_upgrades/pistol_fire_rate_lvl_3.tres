@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_r0g24")
-d_value = 2
+d_value = -2
 level = 3
 unlocked = false
-cost = 300
+cost = 200
